@@ -1,0 +1,240 @@
+<!doctype html>
+<!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
+<!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+    <head>
+        <meta charset="utf-8">
+
+        <title></title>
+        <meta name="description" content="">
+
+        <!-- Mobile viewport optimization h5bp.com/ad -->
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <!--        <meta name="viewport" content="width=device-width">-->
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <!-- Home screen icon  Mathias Bynens mathiasbynens.be/notes/touch-icons -->
+        <!-- For iPhone 4 with high-resolution Retina display: -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/h/apple-touch-icon.png">
+        <!-- For first-generation iPad: -->
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/m/apple-touch-icon.png">
+        <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+        <link rel="apple-touch-icon-precomposed" href="img/l/apple-touch-icon-precomposed.png">
+        <!-- For nokia devices: -->
+        <link rel="shortcut icon" href="img/l/apple-touch-icon.png">
+
+        <!-- iOS web app, delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
+        <!-- <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+        <!-- <script>(function(){var a;if(navigator.platform==="iPad"){a=window.orientation!==90||window.orientation===-90?"img/startup-tablet-landscape.png":"img/startup-tablet-portrait.png"}else{a=window.devicePixelRatio===2?"img/startup-retina.png":"img/startup.png"}document.write('<link rel="apple-touch-startup-image" href="'+a+'"/>')})()</script> -->
+
+        <!-- The script prevents links from opening in mobile safari. https://gist.github.com/1042026 -->
+        <!-- <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script> -->
+
+        <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+        <meta http-equiv="cleartype" content="on">
+
+        <!-- more tags for your 'head' to consider h5bp.com/d/head-Tips -->
+
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/custom.css">        
+        <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+        <script src="js/libs/modernizr-2.0.6.min.js"></script>
+        <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+        <script src="js/utils.js"></script>
+        <script src="js/uialignment.js"></script>
+        <!-- StackMob JS SDK Javascript Dependencies -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://static.stackmob.com/js/json2-min.js"></script>
+        <script type="text/javascript" src="http://static.stackmob.com/js/underscore-1.3.3-min.js"></script>
+        <script type="text/javascript" src="http://static.stackmob.com/js/backbone-0.9.2-min.js"></script>
+        <script type="text/javascript" src="http://static.stackmob.com/js/stackmob-js-0.2.1-min.js"></script>
+        <!-- Initialize the StackMob JS SDK -->
+        <script type="text/javascript">            
+            /* <![CDATA[ */
+            StackMob.init({
+                appName: 'coolsmiles',
+                clientSubdomain: 'janakiramanrajendran',
+                apiVersion: 0
+            });
+            /* ]]> */
+        </script>
+    </head>
+
+    <body>
+
+        <div id="container">
+            <header>
+
+            </header>
+            <div id="main" role="main">                
+                <div class="navBar">
+                    <div>
+                        <a style="float: left;" href="index.html">
+                            <img src="img/icon72x72.png" height="44"/>
+                        </a>
+                        <a style="float: right;" href="#" onclick="showPopupBox()">
+                            <img src="img/grid.png" height="44"/>
+                        </a>
+                        <p class="navTitle">Appointment</p>
+                    </div>
+                </div>
+                <div id="pagecontent" class="pagecontent">
+                    <script type="text/javascript">                        
+                        setPageContentSize(0); 
+                        loadPopupBox();
+                    </script>
+                    <div style="margin-top:10px;text-align: center;">
+                        <input type="radio" name="a_Type" id="a_Type" value="0" checked="checked" />Upcoming
+                        <input type="radio" name="a_Type" id="a_Type" value="1" />Completed                        
+                    </div>                    
+                    <div class="rounded-corners" style="height: 70%; overflow: auto;">
+                        <ul class="userList" id="listView">       
+                        </ul>
+                    </div>
+                    <script type="text/javascript">   
+                        loadIndicator();
+                        loadAppointments($('input:radio[name=a_Type]:checked').val());
+                        $("input:radio[name=a_Type]").click(function() {
+                            var value = $(this).val();                                                        
+                            loadAppointments(value);
+                        });
+
+                        function loadAppointments(a_Status) {  
+                            showIndicator();
+                            $("#listView").hide();
+                            $("#listView").html('');
+                            if(typeof(Storage)!=="undefined")
+                            {
+                                var consumerId = localStorage.consumerId;
+                            }
+                            var Appointments = StackMob.Model.extend({
+                                schemaName: 'appointment_request'
+                            });
+                        
+                            var stackmobQuery = new StackMob.Collection.Query();
+                            stackmobQuery.setExpand(1);
+                            //                            stackmobQuery.equals('clinic', 'f92576c332a44b718e00bf19eb455e57');
+                            stackmobQuery.equals('consumer_id', consumerId);
+                            
+                            if(a_Status == '0') {
+                                stackmobQuery.gte('preferred_date',new Date().getTime());
+                            } else if(a_Status == '1') {
+                                stackmobQuery.lt('preferred_date',new Date().getTime());
+                            }
+                            var appointmentsObj = new Appointments();                        
+                            var doc=appTime=desc='';
+                            appointmentsObj.query(stackmobQuery,{
+                                success: function(collection) {
+                                    $('.rounded-corners').css('background-color','#01568A');
+                                    var jsonObj = collection.toJSON();   
+                                    var count = 0;
+                                    $.each(jsonObj, function(i, object) {
+                                        count = count + 1;
+                                        desc = object.comment;                                                                                                            
+                                        dateStr = parseInt(object.preferred_date);
+                                        appTime = new Date(dateStr);                                    
+                                        $.each(object, function(property, value) {                                        
+                                            if(property == 'preffered_doctor_id') {
+                                                doc = value.doctor_name;
+                                            }
+                                        });
+                                        if(doc != undefined) {
+                                            $("#listView").append('<li style="margin: 1px 0px 15px 0px;  border-bottom-style: solid; border-bottom-width: thin;">'+
+                                                '<p style="color: white;font-size: medium;" >'+doc+'</p>'+ 
+                                                '<p style="color: white;font-size: medium;text-align: right;" >'+appTime+'</p>'+
+                                                '<p style="color: white;font-size: medium;" >'+desc+'</p>'+                                            
+                                                '</li>');                                        
+                                        }                                    
+                                    });
+                                    //                                console.log(desc+':'+title+':'+rating+':'+date+':'+consumer);
+                                    if(count == 0) {
+                                        $("#listView").append('<li style="margin: 1px 0px 15px 0px;  border-bottom-style: solid; border-bottom-width: thin;">'+
+                                            '<p style="color: white;font-size: medium;" >No Appointment found</p>'+
+                                            '</li>');
+                                    }
+                                    
+                                    $("#listView").show();
+                                    hideIndicator();
+                                },
+                                error: function(model, response) {
+                                    hideIndicator();
+                                }
+                            });                                
+                        }
+                    </script>   
+
+                    <div style="text-align: center">
+                        <a href="addAppointment.html"><img src="img/book_appointment_off.png" height="44" width="144" /></a>
+                    </div>
+                </div>
+                <!--                <div id="bottomTabBar" class="bottomTabBar">
+                                    <table border="0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="appointment.html"><img src="img/appointment_off_tab@2x.png" height="40" /></a>
+                                                </td>
+                                                <td>
+                                                    <a href="prescription.html" ><img src="img/prescription_tab.png" height="44" /></a>
+                                                </td>                                
+                                                <td>
+                                                    <a href="services.html" ><img src="img/ourservices_off_tab@2x.png" height="44" /></a>
+                                                </td>
+                                                <td>
+                                                    <a href="contactUs.html" > <img src="img/contacus_off_tab@2x.png" height="44" /></a>
+                                                </td>
+                                                <td>
+                                                    <a href="reviews.html" ><img src="img/review_off_tab@2x.png" height="44" /></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>-->
+                <!--                <script>
+                                    $("#bottomTabBar").css('top',$(window).height()-44);
+                                </script>                -->
+            </div>
+            <footer>
+
+            </footer>
+        </div> <!--! end of #container -->
+
+
+        <!-- JavaScript at the bottom for fast page loading -->
+
+        <!-- scripts concatenated and minified via ant build script-->
+        <script src="js/helper.js"></script>
+        <!-- end scripts-->
+
+        <!-- Debugger - remove for production -->
+        <!-- <script src="https://getfirebug.com/firebug-lite.js"></script> -->
+
+        <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+             mathiasbynens.be/notes/async-analytics-snippet -->
+
+
+        <script>
+            var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+                g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+                s.parentNode.insertBefore(g,s)}(document,"script"));
+        </script>
+
+    </body>
+</html>

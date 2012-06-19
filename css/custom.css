@@ -1,0 +1,200 @@
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.navBar {
+    background-image: url("../img/top_bar.png");
+    background-repeat: repeat-x;
+    height: 44px;
+    width: 100%;
+/*    position: fixed;*/
+}
+.navTitle {
+    color: whiteSmoke;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 0;
+    padding-top: 5px;
+    text-align: center;
+}
+.pagecontent {    
+    background-image: url("../img/background.png");
+    background-repeat: repeat;
+    top: 44px; 
+    bottom: 50px;
+    /*    min-height: 350px;
+        min-width: 320px;*/
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+    /*    position: absolute;*/
+}
+.bottomBar {
+    background-image: url("../img/top_bar.png");
+    background-repeat: repeat-x;
+    height: 44px;
+    text-align: right;
+    position: fixed;
+    width: 100%;
+}
+
+.bottomTabBar {
+    background-image: url("../img/bg_tab_bar.png");
+    background-repeat: repeat-x;
+    height: 44px;
+    /*    text-align: center;*/
+    position: fixed;
+    width: 100%;
+}
+
+.d_Slide {
+    height: 60%; 
+    margin-top: 10px;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    overflow: auto;
+}
+
+.o_List {
+    height: 25%;    
+}
+
+.b_Icon {
+    float: left;
+    /*    height: 90%;*/
+    /*    height: 150px;*/
+    margin-top: 1%;
+    margin-left: 4%;
+    /*    width: 20%;*/
+}
+.tb_Icon {
+    float: left;
+    margin-top: 0%;
+    margin-left: 18%;
+    height: 44px;
+}
+.formtd {
+    padding: 18px;
+    vertical-align: top;
+    width: 50%;
+}
+#registerForm {
+    margin-top: 15px;
+}
+
+#registerForm td {
+    padding: 18px;
+}
+
+.rounded-corners {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #01568B;
+    margin: 4%;
+    width: 93%;
+    -webkit-overflow-scrolling: touch;
+
+}
+
+.userList {
+    list-style: none;
+    /*    color: white;
+        font-size: medium;*/
+    text-indent: 0;
+    padding: 12px;
+}
+.bottomTabBar td {
+    text-align: center;
+    width: 1%;
+}
+
+.modalOverlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0,0,0,0.3); /* black semi-transparent */
+}
+
+/* popup_box DIV-Styles*/
+#popup_box { 
+    display:none; /* Hide the DIV */
+    position:fixed;  
+    _position:absolute; /* hack for internet explorer 6 */  
+    height:165px;  
+    width:50%;  
+    /*    background:#239BF2;  */
+    background: #f6f8f9; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f8f9), color-stop(50%,#e5ebee), color-stop(51%,#d7dee3), color-stop(100%,#f5f7f9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%); /* IE10+ */
+    background: linear-gradient(top,  #f6f8f9 0%,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
+
+
+/*    left: 300px;*/
+    top: 150px;
+    z-index:100; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
+/*    margin-left: 15px;  */
+    margin-left: 25%;  
+
+    /* additional features, can be omitted */
+    border:2px solid #4D87AB;  	
+    padding-bottom: 10px;
+    font-size:15px;  
+    -moz-box-shadow: 0 0 5px #4D87AB;
+    -webkit-box-shadow: 0 0 5px #4D87AB;
+    box-shadow: 0 0 5px #4D87AB;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+a{  
+    cursor: pointer;  
+    text-decoration:none;  
+} 
+
+/* This is for the positioning of the Close Link */
+#popupBoxClose {
+    font-size:20px;  
+    line-height:15px;  
+    right:5px;  
+    top:5px;  
+    position:absolute;  
+    color:#6fa5e2;  
+    font-weight:500;  	
+}
+
+.popupmenu {
+    list-style: none;
+    padding: 0px;
+    color: white;
+    font-weight: bold;
+}
+
+.popupmenu li {
+    padding: 2px;
+    border-bottom: thin solid black;
+}
+.popupmenu a {
+    color: #222;
+    font-family: Lucida Grande;
+    text-shadow: 0 8px 10px #555555;
+}
+.popupmenu a:visited {
+    color: #222;
+    font-family: Lucida Grande;
+    text-shadow: 0 8px 10px #555555;
+}

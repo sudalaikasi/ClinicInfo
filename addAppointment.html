@@ -1,0 +1,335 @@
+<!doctype html>
+<!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
+<!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+    <head>
+        <meta charset="utf-8">
+
+        <title></title>
+        <meta name="description" content="">
+
+        <!-- Mobile viewport optimization h5bp.com/ad -->
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <!--        <meta name="viewport" content="width=device-width">-->
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <!-- Home screen icon  Mathias Bynens mathiasbynens.be/notes/touch-icons -->
+        <!-- For iPhone 4 with high-resolution Retina display: -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/h/apple-touch-icon.png">
+        <!-- For first-generation iPad: -->
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/m/apple-touch-icon.png">
+        <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+        <link rel="apple-touch-icon-precomposed" href="img/l/apple-touch-icon-precomposed.png">
+        <!-- For nokia devices: -->
+        <link rel="shortcut icon" href="img/l/apple-touch-icon.png">
+
+        <!-- iOS web app, delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
+        <!-- <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+        <!-- <script>(function(){var a;if(navigator.platform==="iPad"){a=window.orientation!==90||window.orientation===-90?"img/startup-tablet-landscape.png":"img/startup-tablet-portrait.png"}else{a=window.devicePixelRatio===2?"img/startup-retina.png":"img/startup.png"}document.write('<link rel="apple-touch-startup-image" href="'+a+'"/>')})()</script> -->
+
+        <!-- The script prevents links from opening in mobile safari. https://gist.github.com/1042026 -->
+        <!-- <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script> -->
+
+        <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+        <meta http-equiv="cleartype" content="on">
+
+        <!-- more tags for your 'head' to consider h5bp.com/d/head-Tips -->
+
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+        <script src="js/libs/modernizr-2.0.6.min.js"></script>
+        <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+        <script src="js/utils.js"></script>
+        <script src="js/uialignment.js"></script>
+        <!-- StackMob JS SDK Javascript Dependencies -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://static.stackmob.com/js/json2-min.js"></script>
+        <script type="text/javascript" src="http://static.stackmob.com/js/underscore-1.3.3-min.js"></script>
+        <script type="text/javascript" src="http://static.stackmob.com/js/backbone-0.9.2-min.js"></script>
+        <script type="text/javascript" src="http://static.stackmob.com/js/stackmob-js-0.2.1-min.js"></script>
+        <!-- Initialize the StackMob JS SDK -->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            StackMob.init({
+                appName: 'coolsmiles',
+                clientSubdomain: 'janakiramanrajendran',
+                apiVersion: 0
+            });
+            /* ]]> */
+        </script>    
+
+        <script type="text/javascript">                 
+            function addAppointment () {   
+                showIndicator();
+                var consumer_idVal = localStorage.consumerId;
+                //                var clinic_idVal = 'f92576c332a44b718e00bf19eb455e57';                
+                //                var preffered_doctor_idVal = '2de7a85916a841f2b72cc65ac93bfb60';
+                //                var service_requiredVal  = '8702da61c8d6480b80c9486b3ca3055f';
+                
+                var statusVal = 2;
+                var commentVal = $("#comment").val();
+                var preferred_dateVal = $("#preferreddate").val();
+                var clinic_idVal = $("#clinic").val();
+                var service_requiredVal  = $("#serviceneed").val();
+                var preffered_doctor_idVal = $("#preferreddoctor").val();
+                
+                var Appointment = StackMob.Model.extend({
+                    schemaName: 'appointment_request'
+                });
+                var myDate = new Date(preferred_dateVal); 
+                var appointmentObj = new Appointment({ status: statusVal , comment: commentVal, preferred_date: myDate, 
+                    clinic: clinic_idVal, consumer_id: consumer_idVal, 
+                    preffered_doctor_id: preffered_doctor_idVal,service_required:service_requiredVal });                
+                appointmentObj.create({
+                    success: function(model) {
+                        alert("Appointment added successfully");
+                        hideIndicator();
+                        window.location = "appointment.html";                        
+                    },
+                    error: function(model, response) {
+                        hideIndicator();
+                        alert("Problem in adding appointment");                        
+                    }
+                });
+            }
+        </script>  
+    </head>
+
+    <body>
+
+        <div id="container">
+            <header>
+
+            </header>
+            <div id="main" role="main">                
+                <div class="navBar">
+                    <div>
+                        <a style="float: left;"href="javascript:history.go(-1)"><img src="img/back.png" height="44"/></a>
+                        <a style="float: right;" href="#" onclick="showPopupBox()">
+                            <img src="img/grid.png" height="44"/>
+                        </a>
+                        <p class="navTitle">Add</p>
+                    </div>
+                </div>
+                <div id="pagecontent" class="pagecontent">
+                    <form name="addnewuser" action="addNewUser.html" style="text-align: center;">                    
+                        <script type="text/javascript">
+                            setPageContentSize(0); 
+                            loadPopupBox();
+                        </script>
+                        <table border="0" style="width:100%" id="registerForm">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 48%;text-align: right;">Clinic</td>
+                                    <td style="text-align: left;">
+                                        <select name="clinic" id="clinic" onchange="loadServices();">
+                                            <option value="0">Select Clinic</option>
+                                        </select>                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 48%;text-align: right;">Name</td>
+                                    <td style="text-align: left;">
+                                        <input type="text" name="username" value="" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 48%;text-align: right;">Email</td>
+                                    <td style="text-align: left;">
+                                        <input type="email" name="email" value="" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 48%;text-align: right;">Preferred Date</td>
+                                    <td style="text-align: left;">
+                                        <input type="date" name="preferreddate" value="" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 48%;text-align: right;">Service Needed</td>
+                                    <td style="text-align: left;">
+                                        <select name="serviceneed" id="serviceneed">
+                                            <option value="0">Select Service</option>
+                                        </select>                                                                                
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 48%;text-align: right;">Preferred Doctor</td>
+                                    <td style="text-align: left;">
+                                        <select name="preferreddoctor" id="preferreddoctor">
+                                            <option value="0">Select Doctor</option>
+                                        </select>
+                                    </td>
+                                </tr>   
+                                <tr>
+                                    <td style="width: 48%;text-align: right;">Comment</td>
+                                    <td style="text-align: left;">
+                                        <textarea name="comment" id="comment" rows="4" cols="20">
+                                        </textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <script type="text/javascript">
+                            loadIndicator();
+                            showIndicator();
+                            var Clinic = StackMob.Model.extend({
+                                schemaName: 'clinic'
+                            });
+                        
+                            var stackmobQuery = new StackMob.Collection.Query();                                                        
+                            stackmobQuery.equals('organisation_id', localStorage.organisationId);
+ 
+                            var clinicObj = new Clinic();
+                            var clinic_name='';
+                            clinicObj.query(stackmobQuery,{
+                                success: function(collection) {
+                                    var jsonObj = collection.toJSON();
+                                    $.each(jsonObj, function(i, object) {
+                                        clinic_name = object.clinic_name;
+                                        clinic_id = object.clinic_id;
+                                        $("#clinic").append("<option value='"+clinic_id+"'>"+clinic_name+"</option>");
+                                        console.log(object);
+                                    });
+                                    hideIndicator();
+                                },
+                                error: function(model, response) {
+                                    hideIndicator();
+                                }
+                            });
+                        </script>
+
+                        <a href="#" onclick="addAppointment()"><img src="img/book_appointment_off.png" height="44" width="144" /></a>                        
+                    </form>
+                </div>
+                <!--                <div id="bottomTabBar" class="bottomTabBar">
+                                    <table border="0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="appointment.html"><img src="img/appointment_off_tab@2x.png" height="40" /></a>
+                                                </td>
+                                                <td>
+                                                    <a href="prescription.html" ><img src="img/prescription_tab.png" height="44" /></a>
+                                                </td>                                
+                                                <td>
+                                                    <a href="services.html" ><img src="img/ourservices_off_tab@2x.png" height="44" /></a>
+                                                </td>
+                                                <td>
+                                                    <a href="contactUs.html" > <img src="img/contacus_off_tab@2x.png" height="44" /></a>
+                                                </td>
+                                                <td>
+                                                    <a href="reviews.html" ><img src="img/review_off_tab@2x.png" height="44" /></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <script>
+                                    $("#bottomTabBar").css('top',$(window).height()-44);
+                                </script>-->
+            </div>
+            <footer>
+
+            </footer>
+        </div> <!--! end of #container -->
+
+
+        <!-- JavaScript at the bottom for fast page loading -->
+
+        <!-- scripts concatenated and minified via ant build script-->
+        <script src="js/helper.js"></script>
+        <!-- end scripts-->
+
+        <!-- Debugger - remove for production -->
+        <!-- <script src="https://getfirebug.com/firebug-lite.js"></script> -->
+
+        <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+             mathiasbynens.be/notes/async-analytics-snippet -->
+
+
+        <script>
+            var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+                g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+                s.parentNode.insertBefore(g,s)}(document,"script"));
+        </script>
+        <script>
+            function loadServices() {
+                var Services = StackMob.Model.extend({
+                    schemaName: 'clinic_services'
+                });
+                        
+                var clinic_id = $("#clinic").val();
+                if(clinic_id != '0') {
+                    var stackmobQuery = new StackMob.Collection.Query();                                                        
+                    stackmobQuery.equals('clinic_id', clinic_id);
+ 
+                    var serviceObj = new Services();
+                    var service_name='';
+                    serviceObj.query(stackmobQuery,{
+                        success: function(collection) {
+                            var jsonObj = collection.toJSON();
+                            $("#serviceneed").html('<option value="0">Select Service</option>');
+                            $.each(jsonObj, function(i, object) {
+                                service_name = object.service_name;
+                                clinic_services_id = object.clinic_services_id;
+                                $("#serviceneed").append("<option value='"+clinic_services_id+"'>"+service_name+"</option>");                         
+                            });                                        
+                        }
+                    });
+                    loadDoctors();
+                }                
+            }
+            
+            function loadDoctors () {
+                var Doctors = StackMob.Model.extend({
+                    schemaName: 'doctors'
+                });
+                        
+                var clinic_id = $("#clinic").val();
+                if(clinic_id != '0') {
+                    var stackmobQuery = new StackMob.Collection.Query();                                                        
+                    stackmobQuery.equals('clinic_id', clinic_id);
+ 
+                    var doctorObj = new Doctors();
+                    var service_name='';
+                    doctorObj.query(stackmobQuery,{
+                        success: function(collection) {
+                            var jsonObj = collection.toJSON();
+                            $("#preferreddoctor").html('<option value="0">Select Doctor</option>');
+                            $.each(jsonObj, function(i, object) {
+                                doctor_name = object.doctor_name;
+                                doctors_id = object.doctors_id;
+                                $("#preferreddoctor").append("<option value='"+doctors_id+"'>"+doctor_name+"</option>");                         
+                            });                                        
+                        }
+                    });                    
+                }      
+            }
+        </script>
+    </body>
+</html>
